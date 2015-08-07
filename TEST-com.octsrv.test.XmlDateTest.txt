@@ -1,0 +1,13 @@
+Testsuite: com.octsrv.test.XmlDateTest
+Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 3.92 sec
+------------- Standard Error -----------------
+log4j:WARN No appenders could be found for logger (org.springframework.test.context.junit4.SpringJUnit4ClassRunner).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+------------- ---------------- ---------------
+
+Testcase: testConstruct took 3.874 sec
+Testcase: testConstruct2 took 0 sec
+Testcase: testConstruct3 took 0.015 sec
+Testcase: testConstruct4 took 0 sec
+Testcase: testConstruct5 took 0 sec
