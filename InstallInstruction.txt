@@ -1,0 +1,112 @@
+
+=========================== Installation (KOI8 encoding) =========================
+
+For Windows XP Pro or Debian GNU/Linux 6.0 squeeze
+
+* установленный JDK 6 (jdk6.dev.java.net) или Open JDK 6 (openjdk.java.net),
+ задана переменная окружения JAVA_HOME, например:
+ для Linux:   export JAVA_HOME=/usr/lib/jvm/java-6-openjdk  в файле /etc/profile
+ для Windows: JAVA_HOME=C:\Program Files\Java\jdk1.6.0_23
+ и добавлен путь в PATH:
+ для Linux:   export PATH=$PATH:$JAVA_HOME/bin
+ для Windows: PATH=...;%JAVA_HOME%\bin
+
+* Apache Tomcat 6/7 (tomcat.apache.org или 'apt-get install tomcat6 tomcat6-admin'), 
+ задана переменная окружения TOMCAT_HOME, например:
+ для Linux:   export TOMCAT_HOME=/usr/share/tomcat6   в файле /etc/profile
+ для Windows: TOMCAT_HOME=C:\Program Files\Apache Software Foundation\Tomcat 7.0
+ Необходимо добавить пользователя tomcat в файл tomcat-users.xml, например:
+ для Windows - ${TOMCAT_HOME}/conf/tomcat-users.xml
+ <user username="tomcat" password="<ваш пароль>" roles="manager,manager-script"/>
+ для Linux - /etc/tomcat6/tomcat-users.xml
+ <user username="tomcat" password="<ваш пароль>" roles="manager,manager-script"/>
+ Пароль пользователя tomcat также должен быть задан в OctopusBanners/SharedResource/common.properties
+ В каталоге ${TOMCAT_HOME}/lib должен быть файл catalina-ant.jar
+ Раскомментировать строку <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /> в файле server.xml
+   для Linux:   файл /etc/tomcat6/server.xml
+   для Windows: ${TOMCAT_HOME}/conf/server.xml
+ Перезапустить Tomcat после внесения изменений.
+
+* Apache HTTP Server 2.2 (httpd.apache.org или 'apt-get install apache2')
+** установить apache (httpd.apache.org или 'apt-get install apache2')
+** установить apache модуль mod_jk (http://tomcat.apache.org/download-connectors.cgi или 'sudo apt-get install libapache2-mod-jk'
+** установить/проверить наличие модуля mod_ssl (обычно идет в поставке с apache)
+** скопировать apache настройки:
+ для Ubuntu:  из OctopusBanners/Install/ubuntuApacheConfig в /etc/apache2/
+ для Windows:  из OctopusBanners/Install/windowsApacheConfig в PATH_TO_APACHE\conf\
+** удостовериться, что следующие строки есть в конфигурационном файле apache (httpd.conf или /etc/apache2/mods-enabled/*.load)
+ для Ubuntu:
+        LoadModule jk_module /usr/lib/apache2/modules/mod_jk.so
+        LoadModule ssl_module /usr/lib/apache2/modules/mod_ssl.so
+для Windows:
+        LoadModule jk_module modules/mod_jk.so
+        LoadModule ssl_module modules/mod_ssl.so
+** сгенерировать ssl сертификат с помощью утилиты openssl (http://www.openssl.org или 'Install apt-get install openssl ssl-cert')
+       openssl req -new -out octopus.csr
+       openssl genrsa -out privkey.pem 2048
+       openssl rsa -in privkey.pem -out server.key
+       openssl req -new -key server.key -out server.csr
+       openssl  x509 -in server.csr -out server.cert -req -signkey server.key -days 4000
+       openssl  x509 -in server.cert -out server.der.crt -outform DER
+** Подкорректировать octopus.conf. SSLCertificateFile, SSLCertificateKeyFile должны указывать на файлы  server.der.crt и server.key соответственно
+** перезапутить апач с SSL
+ для Ubutnu:   sudo a2enmod ssl && sudo /etc/init.d/apache2 restart
+ для Windows:  PATH_TO_APACHE \bin\httpd.exe -D SSL
+
+* Apache Ant (ant.apache.org или 'apt-get install ant'),
+  для Windows должна быть задана переменная окружения ANT_HOME, например:
+    ANT_HOME=C:\Program Files\Java\apache-ant-1.8.1
+  и добавлен путь в PATH:
+    PATH=...;%ANT_HOME%\bin
+
+* MySQL Community Server (www.mysql.com или 'apt-get install mysql-server-5.1')
+  Для Windows должна быть задана переменная окружения MYSQL_HOME, например:
+    MYSQL_HOME=C:\Program Files\MySQL\MySQL Server 5.5
+  и добавлен путь в PATH:
+    PATH=...;%MYSQL_HOME%\bin
+  Для Linux в файле настроки /etc/mysql/my.cnf в разделе [mysqld]
+    добавить/исправить строки:
+      lower_case_table_names = 1
+      default-character-set=utf8
+      character-set-server=utf8
+      collation-server=utf8_unicode_ci
+      default-time-zone='+00:00'
+      event_scheduler=on
+    по усмотрению добавить/исправить строки:
+      max_error_count=0
+  Перезапустить MySQL после внесения изменений.
+
+
+* Произвести настройку (возможно, необходимо будет повторить после update)
+    OctopusBanners/SharedResource/common.properties,
+    OctopusBanners/SharedResource/jdbc.properties,
+    OctopusBanners/SharedResource/octsrv.properties и
+    OctopusBanners/SharedResource/test/jdbc.properties
+  в соответствие со своими параметрами.
+
+* Установить права на запись для пользователя tomcat6 или tomcat7 в каталог баннеров
+  <banners.dir> и каталог групп ctn (ctn.dir), заданный в OctopusBanners/SharedResource/octsrv.properties, например:
+    chown tomcat6:tomcat6 /var/lib/tomcat6/webapps/banners/
+
+
+* Запустить ant в каталоге OctopusBanners.
+  Выбрать соответствующую цель сборки и выполнить
+  запуск ant с требуемым типом установки:
+
+    ant build.db  // создает пустую базу данных octsrv, удаляя ВСЕ существующие таблицы
+    ant demo.data // заполняет базу данных демо-данными, удаляя ВСЕ существующие данные
+    ant init.db   // выполняет инициализацию базы данных только глобальными параметрами, 
+                  //   удаляя ВСЕ существующие данные
+    ant test      // выполняет запуск автоматических тестов
+    ant ui        // выполняет установку Octopus Web UI (без инициализации БД)
+    ant wi        // выполняет установку Octopus Service API (без инициализации БД)
+    ant all       // выполняет полную установку проекта, включая создание и инициализацию БД тестовыми данными,
+                  //   установку Octopus Service API и Octopus Web UI
+
+* После завершения установки Octopus Service API будет
+  доступен по адресу:
+    http://HostName/octsrv
+
+  веб-интерфейс Octopus Web UI по адресу:
+    http://HostName/oct
+

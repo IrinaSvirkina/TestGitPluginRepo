@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<project name="OctsrvBanners" basedir="." default="usage">
+    <property environment="env"/>
+    <property name="shared.dir" value="SharedResource"/>
+    <property name="demo.data.dir" value="DemoData"/>
+    <property name="test.banners.dir" value="testBanners"/>
+    <property name="demo.data.file" value="${demo.data.dir}/demoData.xml"/>
+    <property name="init.data.file" value="${demo.data.dir}/initData.xml"/>
+    <property name="init.providers.data.file" value="${demo.data.dir}/initData_providers.xml"/>
+    <property name="init.phones.data.file" value="${demo.data.dir}/initData_phoneMapping.xml"/>
+    <property name="init.targetvalues.data.file" value="${demo.data.dir}/initData_targetValues.xml"/>
+    <property name="octsrv.lib.dir" value="octsrv_libs"/>
+    <property name="octsrv.test.lib.dir" value="octsrv_libs/spring.test"/>
+    <property name="octsrv.base.dir" value="Octsrv_Base"/>
+    <property name="octsrv.ui.dir" value="Octsrv_UI"/>
+    <property name="octsrv.wi.dir" value="Octsrv_WI"/>
+    <property name="octsrv.test.dir" value="Octsrv_Tests"/>
+    <property name="jdbc.properties" value="${shared.dir}/jdbc.properties"/>
+    <property file="${jdbc.properties}"/>
+    <property file="${shared.dir}/common.properties"/>
+    <property file="${shared.dir}/octsrv.properties"/>
+
+    <target name="usage">
+        <echo message="Available targets are:"/>
+        <echo message=""/>
+        <echo message="build.db  --> Create database. WARNING: Overwrite existing database"/>
+        <echo message="demo.data --> Fill database with demo data. WARNING: Overwrite existing tables"/>
+        <echo message="init.db   --> Initialize database. Long operation. WARNING: Overwrite existing tables"/>
+        <echo message="test      --> Run tests"/>
+        <echo message="ui        --> Install Octsrv Web UI"/>
+        <echo message="wi        --> Install Octsrv Service API"/>
+        <echo message="all       --> Full installation. WARNING: Overwrite existing database"/>
+        <echo message=""/>
+    </target>
+
+    <taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask">
+        <classpath>
+            <fileset dir="${octsrv.test.lib.dir}"/>
+            <fileset dir="${octsrv.lib.dir}"/>
+        </classpath>
+    </taskdef>
+
+    <target name="build.db">
+        <ant dir="${octsrv.test.dir}" target="build.db" inheritAll="false">
+            <property name="jdbc.properties" location="${jdbc.properties}"/>
+        </ant>
+    </target>
+
+    <target name="demo.data" depends="build.db">
+        <dbunit driver="${jdbc.driver}"
+                url="${jdbc.url}"
+                userid="${jdbc.username}"
+                password="${jdbc.password}">
+            <operation type="CLEAN_INSERT" src="${init.targetvalues.data.file}"/>
+            <operation type="CLEAN_INSERT" src="${init.providers.data.file}"/>
+            <operation type="CLEAN_INSERT" src="${init.phones.data.file}"/>
+            <operation type="REFRESH" src="${demo.data.file}"/>
+        </dbunit>
+        <copy todir="${banners.dir}">
+            <fileset dir="${test.banners.dir}" excludes="**/.svn"/>
+        </copy>
+    </target>
+
+    <target name="init.db" depends="build.db">
+        <dbunit driver="${jdbc.driver}"
+                url="${jdbc.url}"
+                userid="${jdbc.username}"
+                password="${jdbc.password}">
+            <operation type="CLEAN_INSERT" src="${init.targetvalues.data.file}"/>
+            <operation type="CLEAN_INSERT" src="${init.providers.data.file}"/>
+            <operation type="CLEAN_INSERT" src="${init.phones.data.file}"/>
+            <operation type="CLEAN_INSERT" src="${init.data.file}"/>
+        </dbunit>
+    </target>
+
+    <target name="ui">
+        <ant dir="${octsrv.ui.dir}" target="deploy" inheritAll="false"/>
+    </target>
+
+    <target name="wi">
+        <ant dir="${octsrv.wi.dir}" target="deploy" inheritAll="false"/>
+    </target>
+
+    <target name="test">
+        <ant dir="${octsrv.test.dir}" target="test" inheritAll="false"/>
+    </target>
+
+    <target name="all" depends="demo.data,wi,ui"/>
+    
+    <target name="clean">
+    	<ant dir="${octsrv.ui.dir}" target="clean" inheritAll="false"/>
+    	<ant dir="${octsrv.wi.dir}" target="clean" inheritAll="false"/>
+    	<ant dir="${octsrv.test.dir}" target="clean" inheritAll="false"/>
+    	<ant dir="${octsrv.base.dir}" target="clean" inheritAll="false"/>
+    </target>
+
+</project>
