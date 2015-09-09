@@ -48,7 +48,7 @@ Apd.LOCALE.BLOG.MANAGEBLOGENTRIES = "Protokolleinträge verwalten";
 Apd.LOCALE.BLOG.RETURNHOMETIP = "Zurück zur ursprünglichen Ansicht";
 Ext.ns("Apd.LOCALE.BLOGMANAGE");
 Apd.LOCALE.BLOGMANAGE.REFRESH_LABEL = "Liste aktualisieren";
-Ext.ns("Apd.LOCALE.BLOGMANAGEMENT");
+Ext.ns("Apd.LOCALE.BLOGMANAGEMENT");;
 Apd.LOCALE.BLOGMANAGEMENT.CREATEBUTTON = "Neuen Protokolleintrag erstellen";
 Apd.LOCALE.BLOGMANAGEMENT.DELETEACTION = "Eintrag aus dem Protokoll löschen";
 Ext.ns("Apd.LOCALE.BLOGPAGE.DIALOG");
