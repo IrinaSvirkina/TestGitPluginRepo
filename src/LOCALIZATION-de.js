@@ -1,7 +1,7 @@
 ﻿Ext.ns("Apd.LOCALE.ACTIONS");
 Apd.LOCALE.ACTIONS.BLOGSDIALOG_LABEL = "Blogdialog";;
 Apd.LOCALE.ACTIONS.DEBUGSCREEN_TITLE = "Einfacher Komponententester";
-Apd.LOCALE.ACTIONS.FILEFOLDERPICKER_LABEL = "Datei/Ordner Verwaltung";
+Apd.LOCALE.ACTIONS.FILEFOLDERPICKER_LABEL = "Datei/Ordner Verwaltung";;
 Apd.LOCALE.ACTIONS.FILEPICKER_LABEL = "Dateiwahl";;
 Apd.LOCALE.ACTIONS.FILESAPCEWIZARD_LABEL = "Assistent Dateispeicherort";
 Apd.LOCALE.ACTIONS.FILESPACEPICKER_LABEL = "Auswahl Dateispeicherort";
