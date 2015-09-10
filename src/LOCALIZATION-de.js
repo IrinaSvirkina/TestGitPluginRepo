@@ -1,6 +1,6 @@
 ﻿Ext.ns("Apd.LOCALE.ACTIONS");;;
 Apd.LOCALE.ACTIONS.BLOGSDIALOG_LABEL = "Blogdialog";;;
-Apd.LOCALE.ACTIONS.DEBUGSCREEN_TITLE = "Einfacher Komponententester";
+Apd.LOCALE.ACTIONS.DEBUGSCREEN_TITLE = "Einfacher Komponententester";;
 Apd.LOCALE.ACTIONS.FILEFOLDERPICKER_LABEL = "Datei/Ordner Verwaltung";;
 Apd.LOCALE.ACTIONS.NOTIFICATIONWIZARD_LABEL = "Meldungsassistent";
 Apd.LOCALE.ACTIONS.ORGVISIBILITY_LABEL = "Org Sichtbarkeit";
