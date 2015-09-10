@@ -4,7 +4,7 @@
 ﻿added line 3
 ﻿added line 4
 ﻿added line 5
-Apd.LOCALE.ACTIONS.BLOGSDIALOG_LABEL = "Blogdialog";;
+Apd.LOCALE.ACTIONS.BLOGSDIALOG_LABEL = "Blogdialog";
 Apd.LOCALE.ACTIONS.DEBUGSCREEN_TITLE = "Einfacher Komponententester";
 Apd.LOCALE.ACTIONS.FILEFOLDERPICKER_LABEL = "Datei/Ordner Verwaltung";;
 Apd.LOCALE.ACTIONS.FILEPICKER_LABEL = "Dateiwahl";;
