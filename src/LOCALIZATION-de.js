@@ -1,4 +1,4 @@
-﻿Ext.ns("Apd.LOCALE.ACTIONS");;
+﻿Ext.ns("Apd.LOCALE.ACTIONS");;;
 Apd.LOCALE.ACTIONS.BLOGSDIALOG_LABEL = "Blogdialog";;
 Apd.LOCALE.ACTIONS.DEBUGSCREEN_TITLE = "Einfacher Komponententester";
 Apd.LOCALE.ACTIONS.FILEFOLDERPICKER_LABEL = "Datei/Ordner Verwaltung";;
