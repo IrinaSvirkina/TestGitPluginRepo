@@ -1,4 +1,9 @@
 ﻿Ext.ns("Apd.LOCALE.ACTIONS");;
+﻿added line 1
+﻿added line 2
+﻿added line 3
+﻿added line 4
+﻿added line 5
 Apd.LOCALE.ACTIONS.BLOGSDIALOG_LABEL = "Blogdialog";;
 Apd.LOCALE.ACTIONS.DEBUGSCREEN_TITLE = "Einfacher Komponententester";
 Apd.LOCALE.ACTIONS.FILEFOLDERPICKER_LABEL = "Datei/Ordner Verwaltung";;
@@ -28,9 +33,6 @@ Apd.LOCALE.AUDITLOG.ACTIVITY_VALIDATION_TEXT = "Sie müssen mindestens einen Art
 Apd.LOCALE.AUDITLOG.ALL_LOGIN_ACCOUNTS = "Alle Login-Accounts";
 Apd.LOCALE.AUDITLOG.DATE_TO_EXPORT_IN_GMT = "Exportdatum (GMT)";
 Ext.ns("Apd.LOCALE.AUDITLOG.DESTINATION_FOLDER");
-Apd.LOCALE.AUDITLOG.DESTINATION_FOLDER.LABEL = "Ziel";
-Apd.LOCALE.AUDITLOG.DESTINATION_FOLDER.REQUIRED_MESSAGE = "Sie müssen den Dateispeicherort bzw. Ordner auswählen";
-Apd.LOCALE.AUDITLOG.DESTINATION_FOLDER.REQUIRED_TITLE = "Zielordner muss angegeben werden";
 Apd.LOCALE.AUDITLOG.ERRORACCOUNMESSAGE = "Sie dürfen nicht mehr als {0} Login-Accounts auswählen";
 Apd.LOCALE.AUDITLOG.ERRORACCOUNTITLE = "Login-Account Feld ist beschränkt";
 Apd.LOCALE.AUDITLOG.ERRORSAVEMESSAGE = "Stammdaten für das angeforderte Datum sind nicht online";
