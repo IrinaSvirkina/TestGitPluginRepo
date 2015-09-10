@@ -29,7 +29,7 @@ Apd.LOCALE.ADDPAGE.FAILEDTOSAVESITE_MESSAGE = "Speichern der Webseite fehlgeschl
 Apd.LOCALE.ADDPAGE.PAGECOLUMNS_TITLE = "Seitenspalten";
 Apd.LOCALE.ADDPAGE.PAGEINFORMATION_TITLE = "Seiteninformation";
 Ext.ns("Apd.LOCALE.AUDITLOG");
-Apd.LOCALE.AUDITLOG.ACTIVITY_VALIDATION_TEXT = "Sie müssen mindestens einen Artikel in dieser Gruppe auswählen";
+Apd.LOCALE.AUDITLOG.ACTIVITY_VALIDATION_TEXT = "Sie müssen mindestens einen Artikel in dieser Gruppe auswählen";;
 Apd.LOCALE.AUDITLOG.ALL_LOGIN_ACCOUNTS = "Alle Login-Accounts";
 Apd.LOCALE.AUDITLOG.DATE_TO_EXPORT_IN_GMT = "Exportdatum (GMT)";
 Ext.ns("Apd.LOCALE.AUDITLOG.DESTINATION_FOLDER");
