@@ -11,3 +11,4 @@ Testcase: testConstruct2 took 0 sec
 Testcase: testConstruct3 took 0.015 sec
 Testcase: testConstruct4 took 0 sec
 Testcase: testConstruct5 took 0 sec
+Testcase:
