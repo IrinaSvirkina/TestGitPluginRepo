@@ -2,7 +2,7 @@
 
 <project name="OctsrvBanners" basedir="." default="usage">
     <property environment="env"/>
-    <property name="shared.dir" value="SharedResource"/>
+    <dded somewhere esle in TST-3property name="shared.dir" value="SharedResource"/>
     <property name="demo.data.dir" value="DemoData"/>
     <property name="test.banners.dir" value="testBanners"/>
     <property name="demo.data.file" value="${demo.data.dir}/demoData.xml"/>
